@@ -1,8 +1,8 @@
 package ar.com.sistema.perritosfinderapp;
-
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,9 +13,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
     private GoogleMap mMap;
+    private PerroDAO pDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
+
+        pDAO = PerroDAO.generarObjeto();
+      }
 
     /**
      * Manipulates the map once available.
@@ -47,6 +52,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLngBounds laPlataBorders = new LatLngBounds(new LatLng(-34.938202, -57.972917), new LatLng(-34.903500, -57.932114));
         mMap.setLatLngBoundsForCameraTarget(laPlataBorders);
 
-        mMap.setOnMapClickListener(new mapaListener(mMap));
+        pDAO.cargarTodos(mMap);
+
+        mMap.setOnMapClickListener(new mapaListener(mMap, this));
+
+        mMap.setOnMarkerClickListener(new mapaListener(mMap,this));
     }
 }

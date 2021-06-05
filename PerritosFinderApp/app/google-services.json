@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "71288475021",
+    "project_id": "perritosfinder",
+    "storage_bucket": "perritosfinder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71288475021:android:6771de827dab30e6c101c4",
+        "android_client_info": {
+          "package_name": "ar.com.sistema.perritosfinderapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71288475021-ag848kc49l6t5kh2gp1n4kbf16ie0ugu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcmzp-bDn3q1Y37P6hadt2hnwmZq_81k8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71288475021-ag848kc49l6t5kh2gp1n4kbf16ie0ugu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
