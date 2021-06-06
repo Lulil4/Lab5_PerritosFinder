@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".guardarPerro">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edtDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp"
+            android:ems="10"
+            android:hint="Ingrese descripción"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="62dp"
+            tools:layout_editor_absoluteY="54dp"
+            android:layout_weight="0.1"
+            android:textSize="20dp"/>
+
+        <Button
+            android:id="@+id/btnCargarFotos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/colorPastelGreen"
+            android:padding="30dp"
+            android:text="Cargar fotos"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="18dp"
+            android:layout_marginBottom="20dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rvFotosTmp"
+            android:layout_weight="0.2"
+            ></androidx.recyclerview.widget.RecyclerView>
+
+            <CheckBox
+                android:id="@+id/ckbRetenido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Está retenido? Pueden contactarte por él?"
+                android:layout_weight="0.1"
+                android:textSize="18dp"/>
+
+
+
+        <EditText
+            android:id="@+id/edtTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp"
+            android:ems="10"
+            android:hint="Ingres su número con prefijo (54221...)"
+            android:inputType="number"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="226dp"
+            android:layout_weight="0.1"
+            android:textSize="20dp"
+            android:visibility="invisible"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.2">
+
+            <TextView
+                android:id="@+id/tvMedios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="Medios de contacto:"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:visibility="invisible"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp">
+
+                <CheckBox
+                    android:id="@+id/ckbWhatsapp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Whatsapp"
+                    android:textSize="17dp"
+                    android:visibility="invisible"/>
+
+
+                <CheckBox
+                    android:id="@+id/cbkLlamada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Llamada"
+                    android:textSize="17dp"
+                    android:visibility="invisible"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/colorPastelGreen"
+            android:padding="30dp"
+            android:text="Guardar"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="18dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="0.1"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

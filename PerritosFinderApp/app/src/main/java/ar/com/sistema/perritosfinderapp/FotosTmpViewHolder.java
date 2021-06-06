@@ -1,25 +1,21 @@
 package ar.com.sistema.perritosfinderapp;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class FotosViewHolder extends RecyclerView.ViewHolder {
-
-    ImageView fotoPerro;
+public class FotosTmpViewHolder extends RecyclerView.ViewHolder{
+    ImageView fotoPerroTmp;
     private int position;
 
-    public FotosViewHolder(@NonNull View itemView) {
+    public FotosTmpViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.fotoPerro = itemView.findViewById(R.id.fotoPerro);
+        this.fotoPerroTmp = itemView.findViewById(R.id.fotoPerroTmp);
     }
 
     public void setPosition(int position){
         this.position = position;
     }
-
 }

@@ -1,5 +1,7 @@
 package ar.com.sistema.perritosfinderapp;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -15,16 +17,25 @@ public class Perro {
     private Long telefono;
     private ArrayList<String> medios;
     private LatLng ubicacion;
+    private String fecha;
 
 
-    public Perro(String descripcion, ArrayList<String> fotos, boolean retenido, Long telefono, ArrayList<String> medios, String ubicacion) {
+    public Perro(String descripcion, ArrayList<String> fotos, boolean retenido, Long telefono, ArrayList<String> medios, String ubicacion, String fecha) {
         this.descripcion = descripcion;
         this.fotos = fotos;
+
         this.retenido = retenido;
-        this.telefono = telefono;
-        this.medios = medios;
+        if (retenido == true){
+            this.telefono = telefono;
+            this.medios = medios;
+        }
+        else{
+            this.telefono = Long.valueOf(1);
+            this.medios = new ArrayList<>();
+        }
         String[] latitud = ubicacion.split(",");
         this.ubicacion = new LatLng((Double.parseDouble(latitud[0])), Double.parseDouble(latitud[1]));
+        this.fecha = fecha;
     }
 
     public String getDescripcion() {
@@ -75,6 +86,14 @@ public class Perro {
         this.ubicacion = ubicacion;
     }
 
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -108,6 +127,11 @@ public class Perro {
                 sb = sb.append(" ");
             }
         }
+        sb = sb.append(" - Ubicacion: ");
+        sb = sb.append(this.ubicacion);
+        sb = sb.append(" - Fecha: ");
+        sb = sb.append(this.fecha);
+
         return sb.toString();
     }
 }

@@ -72,7 +72,9 @@ public class PerroDAO {
                                             (boolean)pMapeado.get("retenido"),
                                             (Long)pMapeado.get("telefono"),
                                             (ArrayList)pMapeado.get("medios"),
-                                            (String)pMapeado.get("ubicacion"));
+                                            (String)pMapeado.get("ubicacion"),
+                                            (String)pMapeado.get("fecha")
+                                            );
                                     perros.add(p);
                                 });
 

@@ -57,5 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMapClickListener(new mapaListener(mMap, this));
 
         mMap.setOnMarkerClickListener(new mapaListener(mMap,this));
+
+
     }
 }
