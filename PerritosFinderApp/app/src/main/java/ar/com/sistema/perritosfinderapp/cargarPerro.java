@@ -63,7 +63,7 @@ public class cargarPerro extends AppCompatActivity{
         ArrayList<String> fotos = extras.getStringArrayList("fotos");
         String descripcion = extras.getString("descripcion");
         boolean retenido = extras.getBoolean("retenido");
-        Long telefono = extras.getLong("telefono");
+        String telefono = extras.getString("telefono");
         ArrayList<String> medios = extras.getStringArrayList("medios");
         String fecha = extras.getString("fecha");
 

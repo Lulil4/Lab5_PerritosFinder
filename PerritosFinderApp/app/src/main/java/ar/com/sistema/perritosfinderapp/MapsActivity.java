@@ -1,6 +1,8 @@
 package ar.com.sistema.perritosfinderapp;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -58,6 +60,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setOnMarkerClickListener(new mapaListener(mMap,this));
 
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("ONRESTARTENTRA", "SI");
+        pDAO.cargarTodos(mMap);
     }
 }

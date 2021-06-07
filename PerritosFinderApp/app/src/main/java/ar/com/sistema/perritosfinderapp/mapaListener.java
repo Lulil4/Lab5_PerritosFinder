@@ -29,8 +29,6 @@ public class mapaListener implements GoogleMap.OnMapClickListener, GoogleMap.OnM
 
     @Override
     public void onMapClick(@NonNull LatLng latLng) {
-        map.addMarker(new MarkerOptions().position(latLng).title("TEST"));
-
         Intent intent = new Intent(a, guardarPerro.class);
         intent.putExtra("ubicacion", latLng.toString());
         a.startActivity(intent);

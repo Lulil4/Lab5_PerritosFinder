@@ -21,10 +21,10 @@ public class guardarPerroListener implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+
         Activity a = (guardarPerro)view.getContext();
 
         if(R.id.ckbRetenido == view.getId()){
-            Log.d("ENTRARETENIDO 2", "SI");
             if (((guardarPerro)a).getRetenido().isChecked()) {
                 ((guardarPerro) a).getTvMedios().setVisibility(View.VISIBLE);
                 ((guardarPerro) a).getWsp().setVisibility(View.VISIBLE);
@@ -36,7 +36,6 @@ public class guardarPerroListener implements View.OnClickListener{
                 ((guardarPerro) a).getWsp().setVisibility(View.INVISIBLE);
                 ((guardarPerro) a).getLlamada().setVisibility(View.INVISIBLE);
                 ((guardarPerro) a).getTvTelefono().setVisibility(View.INVISIBLE);
-                Log.d("ENTRARETENIDO 3", "SI");
             }
         }
         else if(R.id.btnCargarFotos == view.getId()){
@@ -48,12 +47,13 @@ public class guardarPerroListener implements View.OnClickListener{
 
         }
         else if(R.id.btnGuardar == view.getId()){
+            ((guardarPerro) a).getLayoutTodoGuardar().setVisibility(View.GONE);
+            ((guardarPerro) a).getTvEspere().setVisibility(View.VISIBLE);
             if (validarDatos((guardarPerro)a)){
-                Log.d("ENTRA 1??", "VER: ");
                 String descripcion = ((guardarPerro) a).getEdtDescripcion().getText().toString();
                 ArrayList<String> fotos = new ArrayList<String>();
                 boolean retenido = false;
-                Long telefono = null;
+                String telefono = null;
                 ArrayList<String> medios = null;
                 CheckBox cbkWhatsapp = ((guardarPerro)a).getWsp();
                 CheckBox cbkLlamada = ((guardarPerro)a).getLlamada();
@@ -62,7 +62,7 @@ public class guardarPerroListener implements View.OnClickListener{
                 if (((guardarPerro) a).getRetenido().isChecked()){
                     medios = new ArrayList<String>();
                     retenido = true;
-                    telefono = Long.parseLong(((guardarPerro) a).getTvTelefono().getText().toString());
+                    telefono = ((guardarPerro) a).getTvTelefono().getText().toString();
                     if (cbkWhatsapp.isChecked()){
                         medios.add("whatsapp");
                     }
@@ -70,24 +70,23 @@ public class guardarPerroListener implements View.OnClickListener{
                         medios.add("llamada");
                     }
                 }
-                String ubicacion = ((guardarPerro)a).getUbicacion();
-                String fecha = traerFechaActual();
+                LatLng ubicacion = ((guardarPerro)a).getUbicacion();
+                String fecha = ((guardarPerro)a).getEdtFecha().getText().toString();
                 List<Uri> uris = ((guardarPerro) a).getUris();
                 for (Uri u: uris) {
                     fotos.add(u.toString());
                 }
 
-                Log.d("LLEGA", "NO SE SI APARECE EL PERRO");
                 Perro p = new Perro(descripcion, fotos, retenido, telefono, medios, ubicacion, fecha);
-                Log.d("TESTPERRO", p.toString());
+                PerroDAO pDAO = PerroDAO.generarObjeto();
+
+                pDAO.subirUno(p);
                 a.finish();
             }
+            ((guardarPerro) a).getTvEspere().setVisibility(View.GONE);
+            ((guardarPerro) a).getLayoutTodoGuardar().setVisibility(View.VISIBLE);
         }
-    }
 
-    public String traerFechaActual(){
-        Date date = java.util.Calendar.getInstance().getTime();
-        return date.toString();
     }
 
     public boolean validarDatos(guardarPerro a){
@@ -96,6 +95,7 @@ public class guardarPerroListener implements View.OnClickListener{
         CheckBox retenido = a.getRetenido();
         CheckBox cbkWhatsapp = a.getWsp();
         CheckBox cbkLlamada = a.getLlamada();
+        String fecha = a.getEdtFecha().getText().toString();
 
         boolean validado = false;
 
@@ -109,6 +109,9 @@ public class guardarPerroListener implements View.OnClickListener{
         }
         else if (descripcion.length() < 5){
             Toast.makeText(a ,"Por favor, escriba una mejor descripción", Toast.LENGTH_SHORT).show();
+        }
+        else if("".equals(fecha) || fecha.length() < 10){
+            Toast.makeText(a ,"Por favor, ingrese fecha y hora", Toast.LENGTH_SHORT).show();
         }
         else if (a.getUris() != null && a.getUris().size() > 3){
             Toast.makeText(a ,"Por favor, sólo cargue 3 fotos", Toast.LENGTH_SHORT).show();

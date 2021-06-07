@@ -14,27 +14,27 @@ public class Perro {
     private String descripcion;
     private ArrayList<String> fotos;
     private boolean retenido;
-    private Long telefono;
+    private String telefono;
     private ArrayList<String> medios;
     private LatLng ubicacion;
     private String fecha;
 
 
-    public Perro(String descripcion, ArrayList<String> fotos, boolean retenido, Long telefono, ArrayList<String> medios, String ubicacion, String fecha) {
+    public Perro(String descripcion, ArrayList<String> fotos, boolean retenido, String telefono, ArrayList<String> medios, LatLng ubicacion, String fecha) {
         this.descripcion = descripcion;
         this.fotos = fotos;
 
         this.retenido = retenido;
         if (retenido == true){
-            this.telefono = telefono;
+            this.telefono = "+54" + telefono;
             this.medios = medios;
         }
         else{
-            this.telefono = Long.valueOf(1);
+            this.telefono = "";
             this.medios = new ArrayList<>();
         }
-        String[] latitud = ubicacion.split(",");
-        this.ubicacion = new LatLng((Double.parseDouble(latitud[0])), Double.parseDouble(latitud[1]));
+        Log.d("TELEFONO; ", this.telefono);
+        this.ubicacion = ubicacion;
         this.fecha = fecha;
     }
 
@@ -62,12 +62,12 @@ public class Perro {
         this.retenido = retenido;
     }
 
-    public Long getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Long telefono) {
-        this.telefono = telefono;
+    public void setTelefono(String telefono) {
+        this.telefono = "+54" +telefono;
     }
 
     public ArrayList<String> getMedios() {

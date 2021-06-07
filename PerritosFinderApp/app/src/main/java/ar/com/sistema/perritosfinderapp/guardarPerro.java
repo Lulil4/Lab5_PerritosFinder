@@ -23,6 +23,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,8 +51,11 @@ public class guardarPerro extends AppCompatActivity {
     private TextView tvTelefono;
     private CheckBox wsp;
     private CheckBox llamada;
-    private String ubicacion;
+    private LatLng ubicacion;
     private TextView tvMedios;
+    private EditText edtFecha;
+    private View layoutTodoGuardar;
+    private TextView tvEspere;
 
     public EditText getEdtDescripcion() {
         return edtDescripcion;
@@ -77,12 +81,24 @@ public class guardarPerro extends AppCompatActivity {
         return llamada;
     }
 
-    public String getUbicacion() {
+    public LatLng getUbicacion() {
         return ubicacion;
     }
 
     public TextView getTvMedios() {
         return tvMedios;
+    }
+
+    public EditText getEdtFecha() {
+        return edtFecha;
+    }
+
+    public View getLayoutTodoGuardar() {
+        return layoutTodoGuardar;
+    }
+
+    public TextView getTvEspere() {
+        return tvEspere;
     }
 
     @Override
@@ -105,17 +121,24 @@ public class guardarPerro extends AppCompatActivity {
         this.wsp= this.findViewById(R.id.ckbWhatsapp);
         this.llamada = this.findViewById(R.id.cbkLlamada);
         this.tvMedios = this.findViewById(R.id.tvMedios);
+        this.edtFecha = this.findViewById(R.id.edtFecha);
+        this.layoutTodoGuardar = this.findViewById(R.id.layoutTodoGuardar);
+        this.tvEspere = this.findViewById(R.id.tvEspere);
 
         this.btnCargaFotos.setOnClickListener(new guardarPerroListener ());
         this.btnGuardar.setOnClickListener(new guardarPerroListener ());
         this.retenido.setOnClickListener(new guardarPerroListener());
 
         Bundle extras = super.getIntent().getExtras();
-        this.ubicacion = extras.getString("ubicacion");
-        this.ubicacion = this.ubicacion.replace("(", "/");
-        this.ubicacion = this.ubicacion.replace(")", "/");
-        String[] arrayUbicacion = ubicacion.split("/");
-        this.ubicacion = arrayUbicacion[2];
+        String ubicacionString = extras.getString("ubicacion");
+        ubicacionString = ubicacionString.replace("(", "");
+        ubicacionString = ubicacionString.replace(")", "");
+        ubicacionString = ubicacionString.replace("lat/lng:", "");
+
+        String[] arrayUbicacion = ubicacionString.split(",");
+
+
+        this.ubicacion = new LatLng(Double.parseDouble(arrayUbicacion[0]), Double.parseDouble(arrayUbicacion[1]));
 
     }
     @Override

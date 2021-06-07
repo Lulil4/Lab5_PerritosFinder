@@ -6,7 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".guardarPerro">
 
+    <TextView
+        android:id="@+id/tvEspere"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Cargando perro, por favor espere..."
+        android:gravity="center"
+        android:textSize="40dp"
+        android:visibility="gone"></TextView>
+
     <LinearLayout
+        android:id="@+id/layoutTodoGuardar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -17,8 +27,26 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:ems="10"
             android:hint="Ingrese descripción"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="62dp"
+            tools:layout_editor_absoluteY="54dp"
+            android:layout_weight="0.1"
+            android:textSize="20dp"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/edtFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Ej: 28/01/2021 18:30hs"
+            android:layout_marginRight="15dp"
             android:inputType="textPersonName"
             tools:layout_editor_absoluteX="62dp"
             tools:layout_editor_absoluteY="54dp"

@@ -27,7 +27,7 @@ tools:context=".cargarPerro">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rvFotos"
-        android:layout_weight="0.3"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_weight="0.2"></androidx.recyclerview.widget.RecyclerView>
 
     <TextView
         android:id="@+id/tvFecha"
