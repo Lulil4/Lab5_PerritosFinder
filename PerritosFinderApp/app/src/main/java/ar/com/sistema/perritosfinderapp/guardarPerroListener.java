@@ -47,9 +47,10 @@ public class guardarPerroListener implements View.OnClickListener{
 
         }
         else if(R.id.btnGuardar == view.getId()){
-            ((guardarPerro) a).getLayoutTodoGuardar().setVisibility(View.GONE);
-            ((guardarPerro) a).getTvEspere().setVisibility(View.VISIBLE);
-            if (validarDatos((guardarPerro)a)){
+            boolean validado = validarDatos((guardarPerro)a);
+
+            if (validado){
+
                 String descripcion = ((guardarPerro) a).getEdtDescripcion().getText().toString();
                 ArrayList<String> fotos = new ArrayList<String>();
                 boolean retenido = false;
@@ -80,11 +81,12 @@ public class guardarPerroListener implements View.OnClickListener{
                 Perro p = new Perro(descripcion, fotos, retenido, telefono, medios, ubicacion, fecha);
                 PerroDAO pDAO = PerroDAO.generarObjeto();
 
-                pDAO.subirUno(p);
+
+                pDAO.subirUno(p, ((guardarPerro) a).getTvEspere(), ((guardarPerro) a).getLayoutTodoGuardar());
+
                 a.finish();
             }
-            ((guardarPerro) a).getTvEspere().setVisibility(View.GONE);
-            ((guardarPerro) a).getLayoutTodoGuardar().setVisibility(View.VISIBLE);
+
         }
 
     }

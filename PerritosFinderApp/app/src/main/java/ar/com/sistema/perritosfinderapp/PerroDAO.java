@@ -2,7 +2,9 @@ package ar.com.sistema.perritosfinderapp;
 
 
 import android.net.Uri;
+import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 
@@ -108,49 +110,55 @@ public class PerroDAO {
                     });
     }
 
-    public void subirUno(Perro p){
-       FirebaseStorage storage = FirebaseStorage.getInstance();
-       StorageReference storageRef = storage.getReference();
+    public void subirUno(Perro p, View espera, View layout){
+       layout.setVisibility(View.GONE);
+       espera.setVisibility(View.VISIBLE);
 
-       String child;
-       StorageReference perrosRef;
-       ArrayList<String> fotosUrl = new ArrayList<String>();
-       int i = 0;
-       for (String f: p.getFotos()) {
-           child = p.getDescripcion() + "." + p.getTelefono() + i + ".jpg";
-           perrosRef = storageRef.child(child);
-           Uri uri = Uri.parse(f);
-           UploadTask task = perrosRef.putFile(uri);
-           while (!task.isSuccessful()) {
-           }
-           Task<Uri> task2 = perrosRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-               @Override
-               public void onSuccess(Uri uri) {
-                   String downloadUrl = uri.toString();
-                   fotosUrl.add(downloadUrl);
-                   Log.d("TRAIGOURL: ", uri.toString());
+       if (layout.getVisibility() == View.GONE) {
 
-                   if (p.getFotos().size() == fotosUrl.size()){
-                       Log.d("TRAIGOURL TAMANIO", " ES: " + fotosUrl.size());
-                       FirebaseFirestore db = FirebaseFirestore.getInstance();
+           FirebaseStorage storage = FirebaseStorage.getInstance();
+           StorageReference storageRef = storage.getReference();
 
-                       Map<String, Object> data = new HashMap<>();
-                       data.put("descripcion", p.getDescripcion());
-                       data.put("fecha", p.getFecha());
-                       data.put("fotos", fotosUrl);
-                       data.put("medios", p.getMedios());
-                       data.put("retenido", p.isRetenido());
-                       data.put("telefono", p.getTelefono());
-                       data.put("ubicacion", p.getUbicacion());
-
-                       db.collection("perritos").document().set(data);
-                   }
+           String child;
+           StorageReference perrosRef;
+           ArrayList<String> fotosUrl = new ArrayList<String>();
+           int i = 0;
+           for (String f : p.getFotos()) {
+               child = p.getDescripcion() + "." + p.getTelefono() + i + ".jpg";
+               perrosRef = storageRef.child(child);
+               Uri uri = Uri.parse(f);
+               UploadTask task = perrosRef.putFile(uri);
+               while (!task.isSuccessful()) {
                }
-           });
+               Task<Uri> task2 = perrosRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                   @Override
+                   public void onSuccess(Uri uri) {
+                       String downloadUrl = uri.toString();
+                       fotosUrl.add(downloadUrl);
+                       Log.d("TRAIGOURL: ", uri.toString());
 
-           while(!task2.isSuccessful()){
+                       if (p.getFotos().size() == fotosUrl.size()) {
+                           Log.d("TRAIGOURL TAMANIO", " ES: " + fotosUrl.size());
+                           FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                           Map<String, Object> data = new HashMap<>();
+                           data.put("descripcion", p.getDescripcion());
+                           data.put("fecha", p.getFecha());
+                           data.put("fotos", fotosUrl);
+                           data.put("medios", p.getMedios());
+                           data.put("retenido", p.isRetenido());
+                           data.put("telefono", p.getTelefono());
+                           data.put("ubicacion", p.getUbicacion());
+
+                           db.collection("perritos").document().set(data);
+                       }
+                   }
+               });
+
+               while (!task2.isSuccessful()) {
+               }
+               i++;
            }
-           i++;
        }
     }
 
