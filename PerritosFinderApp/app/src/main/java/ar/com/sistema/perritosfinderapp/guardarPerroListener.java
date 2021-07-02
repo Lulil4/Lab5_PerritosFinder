@@ -67,7 +67,8 @@ public class guardarPerroListener implements View.OnClickListener{
                     if (cbkWhatsapp.isChecked()){
                         medios.add("whatsapp");
                     }
-                    else if(cbkLlamada.isChecked()) {
+
+                    if(cbkLlamada.isChecked()) {
                         medios.add("llamada");
                     }
                 }

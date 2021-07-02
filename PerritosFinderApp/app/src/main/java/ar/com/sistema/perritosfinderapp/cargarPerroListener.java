@@ -29,7 +29,8 @@ public class cargarPerroListener implements View.OnClickListener {
             i = new Intent(Intent.ACTION_VIEW);
 
             try {
-                String url = "https://api.whatsapp.com/send?phone="+ img.getTag() +"&text=" + URLEncoder.encode("Hola! Vi tu publicación sobre un perro avistado. Quisiera saber..", "UTF-8");
+                String telefono = img.getTag().toString().substring(3);
+                String url = "https://api.whatsapp.com/send?phone="+ telefono +"&text=" + URLEncoder.encode("Hola! Vi tu publicación sobre un perro avistado. Quisiera saber..", "UTF-8");
                 i.setPackage("com.whatsapp");
                 i.setData(Uri.parse(url));
                 if (i.resolveActivity(packageManager) != null) {

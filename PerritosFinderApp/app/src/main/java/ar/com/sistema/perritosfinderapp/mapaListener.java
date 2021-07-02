@@ -51,6 +51,7 @@ public class mapaListener implements GoogleMap.OnMapClickListener, GoogleMap.OnM
                     intent.putExtra("medios", p.getMedios());
                 }
                 a.startActivityForResult(intent, 222);
+                break;
             }
         }
 

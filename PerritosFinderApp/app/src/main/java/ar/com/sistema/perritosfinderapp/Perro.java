@@ -67,7 +67,7 @@ public class Perro {
     }
 
     public void setTelefono(String telefono) {
-        this.telefono = "+54" +telefono;
+        this.telefono = telefono;
     }
 
     public ArrayList<String> getMedios() {

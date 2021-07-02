@@ -66,7 +66,7 @@ public class PerroDAO {
 
     public void cargarTodos(GoogleMap map) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+        perros = new ArrayList<Perro>();
         Task t = db.collection("perritos")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
